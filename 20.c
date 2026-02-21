@@ -1,10 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-int compare(const void *a, const void *b)
-{
-    return (*(int*)a - *(int*)b);
-}
 
 int main()
 {
@@ -16,32 +10,22 @@ int main()
     for(int i = 0; i < n; i++)
         scanf("%d", &arr[i]);
 
-    qsort(arr, n, sizeof(int), compare);
+    int count = 0;
 
-    int left = 0;
-    int right = n - 1;
-
-    int min_sum = arr[left] + arr[right];
-    int min_l = left, min_r = right;
-
-    while(left < right)
+    for(int i = 0; i < n; i++)
     {
-        int sum = arr[left] + arr[right];
+        int sum = 0;
 
-        if(abs(sum) < abs(min_sum))
+        for(int j = i; j < n; j++)
         {
-            min_sum = sum;
-            min_l = left;
-            min_r = right;
-        }
+            sum += arr[j];
 
-        if(sum < 0)
-            left++;
-        else
-            right--;
+            if(sum == 0)
+                count++;
+        }
     }
 
-    printf("%d %d", arr[min_l], arr[min_r]);
+    printf("%d", count);
 
     return 0;
 }
